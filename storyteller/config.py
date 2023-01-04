@@ -4,6 +4,7 @@ from pathlib import Path
 
 @dataclass()
 class StoryTellerConfig:
+    story: str = "Unicorn Earth"
     output_dir: str = Path(__file__).parent.parent / "out"
     disable_nsfw_check: bool = False
     seed: int = 42
