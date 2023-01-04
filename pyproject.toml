@@ -15,7 +15,6 @@ license     = "MIT"
 dependencies = [
   "accelerate[test_trackers]",
   "diffusers",
-  "torch==1.12.1+cu116",
   "transformers",
   "TTS",
 
