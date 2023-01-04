@@ -2,10 +2,10 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-@dataclass
+@dataclass()
 class StoryTellerConfig:
-    disable_nsfw_check: bool = True
-    image_size: int = 256
+    disable_nsfw_check: bool = False
+    image_size: int = 512
     max_new_tokens: int = 50
     writer: str = "gpt2"
     painter: str = "stabilityai/stable-diffusion-2"

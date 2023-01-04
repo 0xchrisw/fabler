@@ -37,9 +37,9 @@ class StoryTeller:
             "text-generation", model=config.writer, device=writer_device
         )
         self.painter = StableDiffusionPipeline.from_pretrained(
-            "CompVis/stable-diffusion-v1-4",
-            revision="fp16",
+            self.config.painter,
             torch_dtype=torch.float16,
+            revision="fp16",
             use_auth_token=False,
         ).to(painter_device)
         if self.config.disable_nsfw_check:
@@ -50,6 +50,10 @@ class StoryTeller:
     @classmethod
     def from_default(cls):
         config = StoryTellerConfig()
+        return cls(config)
+
+    @classmethod
+    def from_config(cls, config: StoryTellerConfig):
         return cls(config)
 
     @classmethod
