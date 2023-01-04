@@ -118,7 +118,7 @@ class StoryTeller:
         return video_path
 
     def write_story(self, prompt: str, num_sentences: int) -> List[str]:
-        sentences = prompt.split(".")
+        sentences = []
         while len(sentences) < num_sentences + 1:
             prompt = self.write(prompt)
             sentences = sent_tokenize(prompt)
