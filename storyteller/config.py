@@ -14,7 +14,7 @@ class StoryTellerConfig:
     writer_device: str = "cuda:0"
     max_new_tokens: int = 50
     writer_prompt_prefix: str = (
-        f"Acting as a story teller for an audience of people aged 16-45, tell a {num_images} sentence story from begining to end, about the following:\n"
+        f"Acting as a story teller. Tell a {num_images} sentence story from begining to end about the following:\n"
     )
     writer_prompt: str = "Once upon a time, unicorns roamed the Earth."
 
