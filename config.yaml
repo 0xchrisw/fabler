@@ -10,7 +10,7 @@ max_new_tokens: 15
 diffusion_prompt_prefix: "Beautiful painting"
 painter: "CompVis/stable-diffusion-v1-4"
 painter_device: "cuda:0"
-image_num: 8
+num_images: 8
 image_size: 256
 
 speaker: "tts_models/en/ljspeech/glow-tts"

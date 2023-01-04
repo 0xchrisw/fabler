@@ -16,7 +16,7 @@ class StoryTellerConfig:
     painter: str = "stabilityai/stable-diffusion-2"
     painter_device: str = "cuda:0"
     image_size: int = 512
-    image_num: int = 10
+    num_images: int = 10
     diffusion_prompt_prefix: str = "Beautiful painting"
 
     speaker: str = "tts_models/en/ljspeech/glow-tts"
