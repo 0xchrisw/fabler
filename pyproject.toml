@@ -13,10 +13,12 @@ readme      = "README.md"
 license     = "MIT"
 
 dependencies = [
-  "accelerate",
+  "accelerate[test_trackers]",
   "diffusers",
   "transformers",
   "TTS",
+  "pyyaml",
+  "tensorboard",
 ]
 
 

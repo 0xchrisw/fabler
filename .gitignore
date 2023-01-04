@@ -1,5 +1,7 @@
 out
 pretrained_models
+*venv/
+generated
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

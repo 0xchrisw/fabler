@@ -1,0 +1,18 @@
+---
+
+story: NAME
+
+disable_nsfw_check: True
+
+writer: "gpt2"
+writer_device: "cuda:0"
+writer_prompt: "Earth - in The Great Blinding. Two years later, without warning, your sight returns. As you look around, you realize that every available wall, floor and surface has been painted with the same message - Don't Tell Them You Can See."
+max_new_tokens: 15
+
+diffusion_prompt_prefix: "Beautiful painting"
+painter: "CompVis/stable-diffusion-v1-4"
+painter_device: "cuda:0"
+num_images: 12
+image_size: 256
+
+speaker: "tts_models/en/ljspeech/glow-tts"
