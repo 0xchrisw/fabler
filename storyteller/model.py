@@ -42,7 +42,7 @@ class StoryTeller:
             # revision="fp16",
             use_auth_token=False,
         ).to(painter_device)
-        if self.config.disable_nsfw_check:
+        if not self.config.nsfw_check:
             self.painter.safety_checker = self.safety_checker
         self.speaker = TTS(config.speaker, progress_bar=True, gpu=True)
         self.sample_rate = self.speaker.synthesizer.output_sample_rate
@@ -92,9 +92,6 @@ class StoryTeller:
     ) -> None:
         video_paths = []
         sentences = self.write_story(prompt, num_images)
-        print(sentences)
-        __import__("sys").exit()
-
         for i, sentence in enumerate(sentences):
             video_path = self._generate(i, sentence)
             video_paths.append(video_path)
@@ -144,9 +141,9 @@ class StoryTeller:
 
 
     def write_story(self, prompt: str, num_sentences: int) -> List[str]:
-        # sentences = []
         sentences = sent_tokenize(prompt)
-        while len(sentences) < num_sentences + 1:
+        story_length = num_sentences + len(sentences)
+        while len(sentences) < story_length:
             prompt = self.write(prompt)
             sentences = sent_tokenize(prompt)
         while len(sentences) > num_sentences:
