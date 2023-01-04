@@ -12,18 +12,18 @@ def get_args():
         "--prompt", type=str, default="Once upon a time, unicorns roamed the Earth."
     )
     parser.add_argument(
-        "--config", type=str, default=None, help="StoryTeller config file path."
+        "--scene", type=str, default=None, help="StoryTeller config file path."
     )
     parser.add_argument("--num_images", type=int, default=10)
+    parser.add_argument("--story-only", type=bool, default=False)
     args = parser.parse_args()
     return args
 
 
 def main():
     args = get_args()
-    config_obj = args
-    if args.config is not None and Path(args.config).exists():
-        config_data = yaml.safe_load(open(args.config))
+    if args.scene is not None and Path(args.scene).exists():
+        config_data = yaml.safe_load(open(args.scene))
         story_teller = StoryTeller.from_config(StoryTellerConfig(**config_data))
         config_obj = config_data
     else:
