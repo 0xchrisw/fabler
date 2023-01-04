@@ -6,7 +6,7 @@ from pathlib import Path
 class StoryTellerConfig:
     story: str = "Unicorn Earth"
     output_dir: str = Path(__file__).parent.parent / "out"
-    disable_nsfw_check: bool = False
+    nsfw_check: bool = False
     seed: int = 42
     num_images: int = 10
 
@@ -14,7 +14,7 @@ class StoryTellerConfig:
     writer_device: str = "cuda:0"
     max_new_tokens: int = 50
     writer_prompt_prefix: str = (
-        f"Acting as a story teller. Tell a {num_images} sentence story from begining to end about the following:\n"
+        f"Acting as a story teller. Tell a fascinating, {num_images} sentence story from begining to end about the following:\n"
     )
     writer_prompt: str = "Once upon a time, unicorns roamed the Earth."
 
