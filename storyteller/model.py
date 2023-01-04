@@ -37,6 +37,7 @@ class StoryTeller:
             width=self.config.image_size,
             use_auth_token=False,
         ).to(painter_device)
+        self.painter.safety_checker = lambda images, **kwargs: images, False  # Disable NSFW check
         self.speaker = TTS(config.speaker)
         self.sample_rate = self.speaker.synthesizer.output_sample_rate
 
