@@ -15,7 +15,7 @@ def run_from_config(config_file: str):
     config_data = yaml.safe_load(open(config_file))
     storyteller_config = StoryTellerConfig(**config_data)
     story_teller = StoryTeller.from_config(storyteller_config)
-    story_teller.generate(config_data.writer_prompt, config_data.num_images)
+    story_teller.generate(config_data["writer_prompt"], config_data["num_images"])
 
 
 def get_args():
