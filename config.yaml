@@ -2,17 +2,19 @@
 
 story: NAME
 
-disable_nsfw_check: True
 
 writer: "pranavpsv/gpt2-genre-story-generator"
 writer_device: "cuda:0"
 writer_prompt: "<BOS> <sci_fi> The Great Blinding. Two years later, without warning, your sight returns. As you look around, you realize that every available wall, floor and surface has been painted with the same message - Don't Tell Them You Can See.<EOS>"
 max_new_tokens: 15
 
-diffusion_prompt_prefix: "Beautiful painting"
+
+diffusion_prompt_prefix: "Future cyber punk story"
 painter: "CompVis/stable-diffusion-v1-4"
 painter_device: "cuda:0"
 num_images: 12
 image_size: 256
+disable_nsfw_check: True
+
 
 speaker: "tts_models/en/ljspeech/glow-tts"
