@@ -4,7 +4,7 @@ from pathlib import Path
 
 @dataclass
 class StoryTellerConfig:
-    image_size: int = 512
+    image_size: int = 256
     max_new_tokens: int = 50
     writer: str = "gpt2"
     painter: str = "stabilityai/stable-diffusion-2"
