@@ -23,8 +23,8 @@ def main():
     args = get_args()
     config_obj = args
     if args.config is not None and Path(args.config).exists():
-        config_data = yaml.safe_load(open(config_file))
-        story_teller = StoryTeller.from_config(toryTellerConfig(**config_data))
+        config_data = yaml.safe_load(open(args.config))
+        story_teller = StoryTeller.from_config(StoryTellerConfig(**config_data))
         config_obj = config_data
     else:
         story_teller = StoryTeller.from_default()
