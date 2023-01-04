@@ -33,10 +33,8 @@ class StoryTeller:
         )
         self.painter = StableDiffusionPipeline.from_pretrained(
             config.painter,
-            height=self.config.image_size,
-            width=self.config.image_size,
-            use_auth_token=False,
-        ).to(painter_device)
+            torch_dtype=torch.float16,
+            use_auth_token=False).to(painter_device)
         self.painter.safety_checker = lambda images, **kwargs: images, False  # Disable NSFW check
         self.speaker = TTS(config.speaker)
         self.sample_rate = self.speaker.synthesizer.output_sample_rate
