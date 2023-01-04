@@ -2,17 +2,22 @@ import logging
 import os
 from typing import List
 
+from PIL.Image import Image
+from TTS.api import TTS
+from diffusers import StableDiffusionPipeline
 import nltk
+from nltk.tokenize import sent_tokenize
 import soundfile as sf
 import torch
-from diffusers import StableDiffusionPipeline
-from nltk.tokenize import sent_tokenize
-from PIL.Image import Image
 from transformers import pipeline
-from TTS.api import TTS
 
 from storyteller import StoryTellerConfig
-from storyteller.utils import check_ffmpeg, make_timeline_string, set_seed, subprocess_run
+from storyteller.utils import (
+    check_ffmpeg,
+    make_timeline_string,
+    set_seed,
+    subprocess_run,
+)
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 logging.getLogger("diffusers").setLevel(logging.CRITICAL)
@@ -32,10 +37,12 @@ class StoryTeller:
             "text-generation", model=config.writer, device=writer_device
         )
         self.painter = StableDiffusionPipeline.from_pretrained(
-            config.painter,
-            torch_dtype=torch.float16,
-            use_auth_token=False).to(painter_device)
-        self.painter.safety_checker = lambda images, **kwargs: images, False  # Disable NSFW check
+            config.painter, torch_dtype=torch.float16, use_auth_token=False
+        ).to(painter_device)
+        self.painter.safety_checker = (
+            lambda images, **kwargs: images,
+            False,
+        )  # Disable NSFW check
         self.speaker = TTS(config.speaker)
         self.sample_rate = self.speaker.synthesizer.output_sample_rate
 
