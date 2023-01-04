@@ -3,6 +3,10 @@ requires = ["hatchling>=1.11.0"]
 build-backend = "hatchling.build"
 
 
+[project.scripts]
+storyteller = "storyteller.__main__:main"
+
+
 [project]
 requires-python = ">=3.8"
 version = "0.0.1"
@@ -20,10 +24,6 @@ dependencies = [
   "pyyaml",
   "tensorboard",
 ]
-
-
-[project.scripts]
-storyteller = "storyteller.__main__:main"
 
 
 [project.optional-dependencies]
