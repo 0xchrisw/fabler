@@ -4,6 +4,7 @@ from pathlib import Path
 
 @dataclass
 class StoryTellerConfig:
+    disable_nsfw_check: bool = True
     image_size: int = 256
     max_new_tokens: int = 50
     writer: str = "gpt2"

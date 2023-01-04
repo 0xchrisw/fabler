@@ -42,8 +42,8 @@ class StoryTeller:
             torch_dtype=torch.float16,
             use_auth_token=False,
         ).to(painter_device)
-        # Disable NSFW check
-        self.painter.safety_checker = lambda images, **kwargs: images, False  # fmt: skip
+        if self.config.disable_nsfw_check:
+            self.painter.safety_checker = self.safety_checker
         self.speaker = TTS(config.speaker)
         self.sample_rate = self.speaker.synthesizer.output_sample_rate
 
@@ -51,6 +51,10 @@ class StoryTeller:
     def from_default(cls):
         config = StoryTellerConfig()
         return cls(config)
+
+    @classmethod
+    def safety_checker(cls, images, **kwargs):
+        return images, False
 
     @torch.inference_mode()
     def paint(self, prompt) -> Image:
