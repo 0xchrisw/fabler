@@ -8,16 +8,20 @@ class StoryTellerConfig:
     output_dir: str = Path(__file__).parent.parent / "out"
     disable_nsfw_check: bool = False
     seed: int = 42
+    num_images: int = 10
 
     writer: str = "gpt2"
     writer_device: str = "cuda:0"
     max_new_tokens: int = 50
+    writer_prefix: str = (
+        f"Write a funny {num_images} sentence story about the following:\n"
+    )
     writer_prompt: str = "Once upon a time, unicorns roamed the Earth."
 
-    painter: str = "stabilityai/stable-diffusion-2"
+    painter: str = "stabilityai/stable-diffusion-2-1"
     painter_device: str = "cuda:0"
     image_size: int = 512
-    num_images: int = 10
-    diffusion_prompt_prefix: str = "Beautiful painting"
+    painter_prompt_prefix: str = "beautiful painting"
+    painter_prompt_postfix: str = "\n\n"
 
     speaker: str = "tts_models/en/ljspeech/glow-tts"
