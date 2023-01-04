@@ -92,6 +92,9 @@ class StoryTeller:
     ) -> None:
         video_paths = []
         sentences = self.write_story(prompt, num_images)
+        print(sentences)
+        __import__("sys").exit()
+
         for i, sentence in enumerate(sentences):
             video_path = self._generate(i, sentence)
             video_paths.append(video_path)
@@ -101,7 +104,7 @@ class StoryTeller:
     def concat_videos(self, video_paths: List[dict]) -> None:
         for video in video_paths:
             subprocess_run(
-                f"ffmpeg -loop 1 -i {video.image_path} -i {video.audio_path} -vf subtitles={video.subtitle_path} -tune stillimage -shortest {video.video_path}"
+                f"ffmpeg -loop 1 -i {video['image']} -i {video['audio']} -vf subtitles={video['subtitle']} -tune stillimage -shortest {video['video']}"
             )
 
         files_path = os.path.join(self.config.output_dir, "files.txt")
