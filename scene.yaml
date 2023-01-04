@@ -9,7 +9,7 @@ disable_nsfw_check: True
 writer: "pranavpsv/genre-story-generator-v2"
 writer_device: "cuda:0"
 max_new_tokens: 42
-writer_prompt: "A dog who thinks they are a cat."
+writer_prompt: "There was once a dog who thought they were a cat."
 
 
 # painter: "CompVis/stable-diffusion-v1-4"
