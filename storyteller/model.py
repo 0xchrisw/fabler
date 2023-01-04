@@ -81,7 +81,7 @@ class StoryTeller:
         return self.writer(
             prompt,
             max_new_tokens=self.config.max_new_tokens,
-            prefix=self.config.writer_prefix,
+            prefix=self.config.writer_prompt_prefix,
         )[0]["generated_text"]
 
 
