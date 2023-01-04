@@ -1,15 +1,13 @@
 ---
 
-num_images: 6
-disable_nsfw_check: True
+num_images: 12
 
 
-# writer: "gpt2"
 # writer: "pranavpsv/genre-story-generator-v2"
 writer_device: "cuda:0"
 max_new_tokens: 42
-writer_prompt: "There was once a dog who thought they were a cat."
-# writer_prompt: "There was once a man so tormented by nightmares that he begged the sleep paralysis demon to keep him awake."
+writer_prompt_prefix: "In the year 8163, society has been transformed by the rise of artificial intelligence and a government run by the most incompetent individuals on the planet. As the anchor of the nightly news broadcast, it's your job to report on the absurd events of the day, from talking dogs running for political office to a chicken claiming to have invented time travel. Welcome to the world of Idiotacracy, where reality is stranger than fiction and nothing is off limits."
+writer_prompt: "Good evening, and welcome to the nightly news. I'm your host, the only remaining human anchor, and it is March 6th 8163. There has been a world wide mass outbreak of zombie chickens. It was noticed after the release of a new, highly questionable chicken nugget flavor at a local fast food chain. Initial investigations into the cause of the chicken zombie outbreak point towards a rogue group of vegan activists who tampered with the chicken feed at local farms."
 
 
 # painter: "CompVis/stable-diffusion-v1-4"
@@ -21,11 +19,4 @@ painter_prompt_postfix: "intricate detail, studio quality, fascinating, evocativ
 
 
 speaker: "tts_models/en/ljspeech/glow-tts"
-
-
-# NOTES
-#  SD Prompts
-#    - https://openart.ai/presets
-#    -
-#
 
