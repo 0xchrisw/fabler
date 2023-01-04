@@ -1,7 +1,8 @@
-out
-pretrained_models
+__private__/
+out/
+pretrained_models/
 *venv/
-generated
+generated/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
