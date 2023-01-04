@@ -37,12 +37,12 @@ class StoryTeller:
             "text-generation", model=config.writer, device=writer_device
         )
         self.painter = StableDiffusionPipeline.from_pretrained(
-            config.painter, torch_dtype=torch.float16, use_auth_token=False
+            "CompVis/stable-diffusion-v1-4",
+            revision="fp16",
+            torch_dtype=torch.float16,
+            use_auth_token=False,
         ).to(painter_device)
-        self.painter.safety_checker = (
-            lambda images, **kwargs: images,
-            False,
-        )  # Disable NSFW check
+        self.painter.safety_checker = lambda images, **kwargs: images, False  # Disable NSFW check
         self.speaker = TTS(config.speaker)
         self.sample_rate = self.speaker.synthesizer.output_sample_rate
 
