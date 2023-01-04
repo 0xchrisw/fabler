@@ -6,18 +6,6 @@ import yaml
 from storyteller import StoryTeller, StoryTellerConfig
 
 
-def run_demo():
-    story_teller = StoryTeller.from_default()
-    story_teller.generate(args.prompt, args.num_images)
-
-
-def run_from_config(config_file: str):
-    config_data = yaml.safe_load(open(config_file))
-    storyteller_config = StoryTellerConfig(**config_data)
-    story_teller = StoryTeller.from_config(storyteller_config)
-    story_teller.generate(config_data["writer_prompt"], config_data["num_images"])
-
-
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -33,10 +21,14 @@ def get_args():
 
 def main():
     args = get_args()
+    config_obj = args
     if args.config is not None and Path(args.config).exists():
-        run_from_config(args.config)
+        config_data = yaml.safe_load(open(config_file))
+        story_teller = StoryTeller.from_config(toryTellerConfig(**config_data))
+        config_obj = config_data
     else:
-        run_demo()
+        story_teller = StoryTeller.from_default()
+    story_teller.generate(config_obj["writer_prompt"], config_obj["num_images"])
 
 
 if __name__ == "__main__":
