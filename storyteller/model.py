@@ -1,5 +1,6 @@
 import logging
 import os
+from pathlib import Path
 from typing import List
 
 from PIL.Image import Image
@@ -47,22 +48,18 @@ class StoryTeller:
         self.speaker = TTS(config.speaker, progress_bar=True, gpu=True)
         self.sample_rate = self.speaker.synthesizer.output_sample_rate
 
-
     @classmethod
     def from_default(cls):
         config = StoryTellerConfig()
         return cls(config)
 
-
     @classmethod
     def from_config(cls, config: StoryTellerConfig):
         return cls(config)
 
-
     @classmethod
     def safety_checker(cls, images, **kwargs):
         return images, False
-
 
     @torch.inference_mode()
     def paint(self, prompt) -> Image:
@@ -70,11 +67,9 @@ class StoryTeller:
             f"{self.config.painter_prompt_prefix} {prompt}, {self.config.painter_prompt_postfix}"
         ).images[0]
 
-
     @torch.inference_mode()
     def speak(self, prompt) -> List[int]:
         return self.speaker.tts(prompt)
-
 
     @torch.inference_mode()
     def write(self, prompt) -> str:
@@ -84,41 +79,54 @@ class StoryTeller:
             prefix=self.config.writer_prompt_prefix,
         )[0]["generated_text"]
 
-
     def generate(
         self,
         prompt: str,
         num_images: int,
     ) -> None:
         video_paths = []
-        sentences = self.write_story(prompt, num_images)
+        sentences = self.generate_text(prompt, num_images)
         for i, sentence in enumerate(sentences):
             video_path = self._generate(i, sentence)
             video_paths.append(video_path)
         self.concat_videos(video_paths)
 
-
     def concat_videos(self, video_paths: List[dict]) -> None:
+        files_data = []
+        files_path = Path(f"{self.config.output_dir}/files.txt")
+        output_path = Path(f"{self.config.output_dir}/out.mp4")
         for video in video_paths:
+            print(f"Generating {video['video']}...")
+            files_data.append(f"file {Path(video['video']).name}")
             subprocess_run(
                 f"ffmpeg -loop 1 -i {video['image']} -i {video['audio']} -vf subtitles={video['subtitle']} -tune stillimage -shortest {video['video']}"
             )
-
-        files_path = os.path.join(self.config.output_dir, "files.txt")
-        output_path = os.path.join(self.config.output_dir, "out.mp4")
-        with open(files_path, "w+") as f:
-            for video_path in video_paths:
-                f.write(f"file {os.path.split(video_path)[-1]}\n")
+        files_path.write_text("\n".join(files_data))
         subprocess_run(f"ffmpeg -f concat -i {files_path} -c copy {output_path}")
 
-
     def _generate(self, id_: int, sentence: str) -> dict:
-        image_path = os.path.join(self.config.output_dir, f"{id_}.png")
+        return {
+            "audio": self.generate_audio(id_, sentence),
+            "image": self.generate_image(id_, sentence),
+            "subtitle": Path(f"{self.config.output_dir}/{id_}.srt"),
+            "video": Path(f"{self.config.output_dir}/{id_}.mp4"),
+        }
+
+    def generate_text(
+        self, prompt: str, num_sentences: int, skip: bool = False
+    ) -> List[str]:
+        sentences = sent_tokenize(prompt)
+        story_length = num_sentences + len(sentences)
+        while len(sentences) < story_length:
+            prompt = self.write(prompt)
+            sentences = sent_tokenize(prompt)
+        while len(sentences) > num_sentences:
+            sentences.pop()
+        return sentences
+
+    def generate_audio(self, id_: int, sentence: str, skip: bool = False) -> str:
         audio_path = os.path.join(self.config.output_dir, f"{id_}.wav")
         subtitle_path = os.path.join(self.config.output_dir, f"{id_}.srt")
-        video_path = os.path.join(self.config.output_dir, f"{id_}.mp4")
-        image = self.paint(sentence)
-        image.save(image_path)
         audio = self.speak(sentence)
         duration, remainder = divmod(len(audio), self.sample_rate)
         if remainder:
@@ -128,24 +136,10 @@ class StoryTeller:
         subtitle = f"0\n{make_timeline_string(0, duration)}\n{sentence}"
         with open(subtitle_path, "w+") as f:
             f.write(subtitle)
-        return {
-            "subtitle": subtitle_path,
-            "audio": audio_path,
-            "image": image_path,
-            "video": video_path
-        }
+        return audio_path
 
-
-    def generate_audio(self, sentence: str) -> None:
-        ...
-
-
-    def write_story(self, prompt: str, num_sentences: int) -> List[str]:
-        sentences = sent_tokenize(prompt)
-        story_length = num_sentences + len(sentences)
-        while len(sentences) < story_length:
-            prompt = self.write(prompt)
-            sentences = sent_tokenize(prompt)
-        while len(sentences) > num_sentences:
-            sentences.pop()
-        return sentences
+    def generate_image(self, id_: int, sentence: str, skip: bool = False) -> str:
+        image_path = os.path.join(self.config.output_dir, f"{id_}.png")
+        image = self.paint(sentence)
+        image.save(image_path)
+        return image_path
