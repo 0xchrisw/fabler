@@ -4,23 +4,13 @@ from pathlib import Path
 from typing import List
 
 from PIL.Image import Image
-from TTS.api import TTS
 from diffusers import StableDiffusionPipeline
-# import nltk
-# from nltk.tokenize import sent_tokenize
-import soundfile
 import torch
 from transformers import pipeline
 
 from storyteller import StoryTellerConfig
-from storyteller.pipelines import speaker
-from storyteller.pipelines import writer
-from storyteller.utils import (
-    check_ffmpeg,
-    # make_timeline_string,
-    set_seed,
-    subprocess_run,
-)
+from storyteller.pipelines import painter, speaker, writer
+from storyteller.utils import check_ffmpeg, set_seed, subprocess_run
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 logging.getLogger("diffusers").setLevel(logging.CRITICAL)
@@ -32,12 +22,10 @@ class StoryTeller:
         check_ffmpeg()
         set_seed(config.seed)
         self.config = config
-        os.makedirs(config.output_dir, exist_ok=True)
-        painter_device = torch.device(config.writer_device)
-        self.writer = writer.init(self.config)
-        # self.speaker = TTS(config.speaker, progress_bar=True, gpu=True)
-        # self.sample_rate = self.speaker.synthesizer.output_sample_rate
-        self.speaker = speaker.init(self.config)
+        # self.writer = writer.init(self.config)
+        # self.speaker = speaker.init(self.config)
+        self.painter = painter.init(self.config)
+        # painter_device = torch.device(config.writer_device)
         # self.painter = StableDiffusionPipeline.from_pretrained(
         #     self.config.painter,
         #     torch_dtype=torch.float16,
@@ -46,24 +34,22 @@ class StoryTeller:
         # ).to(painter_device)
         # if not self.config.nsfw_check:
         #     self.painter.safety_checker = self.safety_checker
+        os.makedirs(config.output_dir, exist_ok=True)
+        __import__("sys").exit(0)
 
     @classmethod
     def init(cls, config: StoryTellerConfig = StoryTellerConfig()):
         return cls(config)
 
-    @classmethod
-    def safety_checker(cls, images, **kwargs):
-        return images, False
-
-    @torch.inference_mode()
-    def paint(self, prompt) -> Image:
-        return self.painter(
-            f"{self.config.painter_prompt_prefix} {prompt}, {self.config.painter_prompt_postfix}"
-        ).images[0]
+    # @classmethod
+    # def safety_checker(cls, images, **kwargs):
+    #     return images, False
 
     # @torch.inference_mode()
-    # def speak(self, prompt) -> List[int]:
-    #     return self.speaker.tts(prompt)
+    # def paint(self, prompt) -> Image:
+    #     return self.painter(
+    #         f"{self.config.painter_prompt_prefix} {prompt}, {self.config.painter_prompt_postfix}"
+    #     ).images[0]
 
     def generate(
         self,
@@ -87,6 +73,9 @@ class StoryTeller:
             "The toaster, who declined to be interviewed, has already implemented several changes at the company.",
             "The changes include the installation of additional outlets in the office for toasting bread and the introduction of a toaster-themed dress code.",
             "Employees at the company have mixed reactions to the appointment.",
+            "In other news, a group of pandas have taken over the White House.",
+            "The Panda Party is promising to govern with bamboo sticks and bamboo-based policies.",
+            "This is your anchor, signing off.",
         ]
         for i, sentence in enumerate(sentences):
             video_path = self._generate(i, sentence)
@@ -96,7 +85,7 @@ class StoryTeller:
     def _generate(self, id_: int, sentence: str) -> dict:
         return {
             "audio": self.speaker.generate(id_, sentence),
-            "image": self.generate_image(id_, sentence),
+            "image": self.painter.generate(id_, sentence),
             "subtitle": Path(f"{self.config.output_dir}/{id_}.srt"),
             "video": Path(f"{self.config.output_dir}/{id_}.mp4"),
         }
@@ -113,34 +102,3 @@ class StoryTeller:
             )
         files_path.write_text("\n".join(files_data))
         subprocess_run(f"ffmpeg -f concat -i {files_path} -c copy {output_path}")
-
-    # def generate_audio(self, id_: int, sentence: str) -> str:
-    #     audio_path = os.path.join(self.config.output_dir, f"{id_}.wav")
-    #     subtitle_path = os.path.join(self.config.output_dir, f"{id_}.srt")
-    #     audio = self.speak(sentence)
-    #     duration, remainder = divmod(len(audio), self.sample_rate)
-    #     if remainder:
-    #         duration += 1
-    #         audio.extend([0] * (self.sample_rate - remainder))
-    #     soundfile.write(audio_path, audio, self.sample_rate)
-    #     subtitle = f"0\n{make_timeline_string(0, duration)}\n{sentence}"
-    #     with open(subtitle_path, "w+") as f:
-    #         f.write(subtitle)
-    #     return audio_path
-
-    def generate_image(self, id_: int, sentence: str) -> str:
-        image_path = os.path.join(self.config.output_dir, f"{id_}.png")
-        # image = self.paint(sentence)
-        # image.save(image_path)
-        return image_path
-
-    def generate_animation(self, sentences: str) -> str:
-        # https://colab.research.google.com/github/nateraw/stable-diffusion-videos/blob/main/stable_diffusion_videos.ipynb
-        # https://towardsdatascience.com/make-your-art-move-with-stable-diffusion-animations-80de62eec633
-        num_frames = self.num_images
-        animations = [sentences[x : x + 2] for x in range(0, len(sentences), 2)]
-        print(animations)
-        # image_path = os.path.join(self.config.output_dir, f"{id_}.png")
-        # image = self.paint(sentence)
-        # image.save(image_path)
-        # return image_path
