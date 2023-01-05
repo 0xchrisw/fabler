@@ -26,3 +26,7 @@ class StoryTellerConfig:
 
     # TODO: Remove mutable `default_factory` and replace with default values
     puppeteer: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        self.output_dir = Path(self.output_dir)
+        self.output_dir.mkdir(exist_ok=True, parents=True)
