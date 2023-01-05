@@ -23,3 +23,7 @@ painter_prompt_postfix: >
 
 speaker: "tts_models/en/ljspeech/fast_pitch"
 
+
+puppeteer:
+  model: "test/model"
+
