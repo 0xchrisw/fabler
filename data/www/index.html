@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <!-- hero -->
+    <div id="hero" class="flex one grow center">
+      <div class="title">
+        <h1></h1>
+        <h3>AI augmented  generation</h3>
+      </div>
+      <div class="callout">
+        <p>.</p>
+      </div>
+    </div>
+    </hr>
+    <!-- /hero -->
+
+
+    <div id="content">
+      <form action="/" method="get">
+        <div class="flex six">
+          <div class="sixth">SIEM:</div>
+          <div class="four-fifth">
+            <select>
+              <option value="elk" selected>ELK</option>
+              <option value="splunk">Splunk</option>
+            </select>
+          </div>
+
+          <div class="sixth">Query:</div>
+          <div class="four-fifth">
+            <input type="text" id="query_text" name="query_text" minlength="4" placeholder="start typing to begin...">
+          </div>
+
+          <div class="sixth">Results:</div>
+          <div class="four-fifth">
+            <textarea class="form-control" id="output" rows="6"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+
+  </body>
+</html>

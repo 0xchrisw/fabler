@@ -1,0 +1,52 @@
+
+#hero {
+  background: #000;
+  color: #fff;
+  padding: 2rem;
+}
+#hero .title {
+  margin:  0;
+  padding: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+#hero .title h1 {
+  margin:  0;
+  padding: 0;
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+#hero .title h3 {
+  margin:  0;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+#hero .callout {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#hero .callout p {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin: 0 16%;
+  width: 69%;
+  color: #999;
+}
+
+#hero .callout p a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+
+#content {
+  padding: 3rem;
+}
+
