@@ -23,12 +23,12 @@ def get_args():
 def main():
     args = get_args()
     if args.scene is not None and Path(args.scene).exists():
-        config_data = yaml.safe_load(open(args.scene))
-        story_teller = StoryTeller.from_config(StoryTellerConfig(**config_data))
-        config_obj = config_data
+        _config = yaml.safe_load(open(args.scene))
+        story_teller = StoryTeller.init(StoryTellerConfig(**_config))
     else:
-        story_teller = StoryTeller.from_default()
-    story_teller.generate(config_obj["writer_prompt"], config_obj["num_images"])
+        _config = args.__dict__
+        story_teller = StoryTeller.init()
+    story_teller.generate(_config["writer_prompt"], _config["num_images"])
 
 
 if __name__ == "__main__":
