@@ -15,7 +15,7 @@ def arguments():
     text = request.args.get("text", "")
     if not text:
         # TODO: Move to config
-        return Path(__file__).parent.parent / "data" / "www" / "index.html").read_text(
+        return Path(Path(__file__).parent.parent / "data" / "www" / "index.html").read_text(
             encoding="utf-8"
         )
 
