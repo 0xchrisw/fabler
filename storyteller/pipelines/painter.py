@@ -9,7 +9,6 @@ import torch
 
 from storyteller import StoryTellerConfig
 
-
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 logging.getLogger("diffusers").setLevel(logging.CRITICAL)
 logging.getLogger("transformers").setLevel(logging.CRITICAL)

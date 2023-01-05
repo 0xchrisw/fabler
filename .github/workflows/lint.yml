@@ -34,9 +34,8 @@ jobs:
       - name: 🌱 Linting with black
         run: |
           mkdir -p /tmp/artifacts
-          python3 -m pip install --upgrade pip wheel
-          python3 -m pip install --no-compile --editable '.[developer]'
-          make style
+          make install
+          make lint
 
 
       - name: 🦹‍♂️ Scanning with bandit
