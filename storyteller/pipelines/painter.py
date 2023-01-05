@@ -45,6 +45,12 @@ class StoryPainter:
     def generate_animation(self, sentences: str) -> str:
         # https://colab.research.google.com/github/nateraw/stable-diffusion-videos/blob/main/stable_diffusion_videos.ipynb
         # https://towardsdatascience.com/make-your-art-move-with-stable-diffusion-animations-80de62eec633
+
+        # If there is an even number of sentences, use self.generate_text()
+        # to generate a final sentence; useful for animations
+        # if num_images % 2 == 0:
+        #     num_images += 1
+
         num_frames = self.num_images
         animations = [sentences[x : x + 2] for x in range(0, len(sentences), 2)]
         print(animations)
