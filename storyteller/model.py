@@ -14,16 +14,13 @@ logging.getLogger("transformers").setLevel(logging.CRITICAL)
 
 class StoryTeller:
     def __init__(self, config: StoryTellerConfig):
-        # check_ffmpeg()
-        # set_seed(config.seed)
-        # self.config = config
-        # self.writer = writer.init(self.config)
-        # self.speaker = speaker.init(self.config)
-        # self.painter = painter.init(self.config)
-        # os.makedirs(config.output_dir, exist_ok=True)
-        print(config)
-        __import__("sys").exit(0)
-
+        check_ffmpeg()
+        set_seed(config.seed)
+        self.config = config
+        self.writer = writer.init(self.config)
+        self.speaker = speaker.init(self.config)
+        self.painter = painter.init(self.config)
+        os.makedirs(config.output_dir, exist_ok=True)
 
     @classmethod
     def init(cls, config: StoryTellerConfig = StoryTellerConfig()):
@@ -35,15 +32,9 @@ class StoryTeller:
         num_images: int,
     ) -> None:
         video_paths = []
-
-        # If there is an even number of sentences, use self.generate_text()
-        # to generate a final sentence; useful for animations
-        if num_images % 2 == 0:
-            num_images += 1
         sentences = self.writer.generate(prompt, num_images)
         for i, sentence in enumerate(sentences):
-            video_path = self._generate(i, sentence)
-            video_paths.append(video_path)
+            video_paths.append(self._generate(i, sentence))
         self.concat_videos(video_paths)
 
     def _generate(self, id_: int, sentence: str) -> dict:
@@ -61,8 +52,9 @@ class StoryTeller:
         for video in video_paths:
             print(f"Generating {video['video']}...")
             files_data.append(f"file {Path(video['video']).name}")
+            # TODO: Add multi-processing here
             subprocess_run(
-                f"ffmpeg -loop 1 -i {video['image']} -i {video['audio']} -vf subtitles={video['subtitle']} -hwaccel -tune stillimage -shortest {video['video']}"
+                f"ffmpeg -loop 1 -i {video['image']} -i {video['audio']} -vf subtitles={video['subtitle']} -tune stillimage -shortest {video['video']}"
             )
         files_path.write_text("\n".join(files_data))
         subprocess_run(f"ffmpeg -f concat -i {files_path} -c copy {output_path}")
