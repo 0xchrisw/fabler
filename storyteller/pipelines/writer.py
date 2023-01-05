@@ -43,6 +43,7 @@ class StoryWriter:
             sentences = sent_tokenize(prompt)
         while len(sentences) > num_sentences + 1:
             sentences.pop()
+        Path(f"{self.config.output_dir}/sentences.txt").write_text("\n".join(sentences))
         return sentences
 
 
