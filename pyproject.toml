@@ -32,6 +32,8 @@ developer = [
   "black",
   "flake8",
   "isort",
+  "mypy",
+  "types-requests",
 ]
 
 
