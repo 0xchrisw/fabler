@@ -14,7 +14,7 @@ SHELL         := /bin/bash
 
 # Modify the block character to be `-\t` instead of `\t`
 ifeq ($(origin .RECIPEPREFIX), undefined)
-  $(error This version of Make does not support .RECIPEPREFIX.)
+	$(error This version of Make does not support .RECIPEPREFIX.)
 endif
 .RECIPEPREFIX = -
 
@@ -41,9 +41,15 @@ define Install
 endef
 
 
+define Lint
+-	python3 -m black $(SRC_DIR)
+-	python3 -m isort $(SRC_DIR)
+-	python3 -m flake8 --config=./utils/.flake8 $(SRC_DIR)
+endef
+
+
 define TypeCheck
-	mypy                         \
-		storyteller                \
+	python3 -m mypy storyteller  \
 		--ignore-missing-imports   \
 		--follow-imports=skip      \
 		--show-error-codes         \
@@ -78,9 +84,7 @@ update: ## git pull branch
 
 .PHONY: lint
 lint: ## Lint the code
--	black $(SRC_DIR)
--	isort $(SRC_DIR)
--	flake8 --config=./utils/.flake8 $(SRC_DIR)
+-	$(call Lint)
 
 
 .PHONY: type
