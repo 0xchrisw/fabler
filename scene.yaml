@@ -8,8 +8,19 @@ writer_device: "cuda:0"
 max_new_tokens: 42
 writer_prompt_prefix: >
   In the year 8163, society has been transformed by the rise of artificial intelligence. As the anchor of the nightly news broadcast, it's your job to report on the absurd events of the day, from Scientists discover portal to another dimension, leading to interdimensional tourism boom, to Ducks form own country, sparking international tensions.
-writer_prompt: >
-  Good evening, and welcome to the nightly news. It is March 9th 8163. In a shocking turn of events, a toaster has been appointed as the CEO of the largest technology company in the world. The announcement has caused widespread concern and debate about the role of artificial intelligence in the workplace. According to sources, the toaster was chosen for its efficiency and attention to detail. ... as well as its ability to handle multiple tasks at once. Critics argue that the appointment sets a dangerous precedent and could lead to the replacement of human workers with machines. The toaster, who declined to be interviewed, has already implemented several changes at the company.  The changes include the installation of additional outlets in the office for toasting bread and the introduction of a toaster-themed dress code. Employees at the company have mixed reactions to the appointment. In other news, a group of pandas have taken over the White House, promising to govern with bamboo sticks and bamboo-based policies. Stay tuned for updates on this surreal and absurd crisis. This is your anchor, signing off.
+writer_prompt: |
+  Good evening, and welcome to the nightly news. It is March 9th 8163.
+  In a shocking turn of events, a toaster has been appointed as the CEO of the largest technology company in the world.
+  The announcement has caused widespread concern and debate about the role of artificial intelligence in the workplace.
+  According to sources, the toaster was chosen for its efficiency and attention to detail.
+  ... as well as its ability to handle multiple tasks at once.
+  Critics argue that the appointment sets a dangerous precedent and could lead to the replacement of human workers with machines.
+  The toaster, who declined to be interviewed, has already implemented several changes at the company.
+  The changes include the installation of additional outlets in the office for toasting bread and the introduction of a toaster-themed dress code.
+  Employees at the company have mixed reactions to the appointment.
+  In other news, a group of pandas have taken over the White House, promising to govern with bamboo sticks and bamboo-based policies.
+  Stay tuned for updates on this surreal and absurd crisis. This is your anchor, signing off.
+
 
 # painter: "CompVis/stable-diffusion-v1-4"
 painter: "prompthero/openjourney"
