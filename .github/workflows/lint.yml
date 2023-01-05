@@ -49,6 +49,7 @@ jobs:
 
       - name: 🦹‍♂️ Scanning with bandit
         run: |
+          python3 -m pip install bandit
           bandit                                    \
             -v                                      \
             -f txt                                  \
