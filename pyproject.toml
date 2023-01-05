@@ -19,6 +19,7 @@ license     = "MIT"
 dependencies = [
   "accelerate[test_trackers]",
   "diffusers",
+  "flask",
   "transformers",
   "TTS",
   "pyyaml",
