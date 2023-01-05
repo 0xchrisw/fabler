@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 
@@ -23,3 +23,6 @@ class StoryTellerConfig:
     painter_prompt_postfix: str = "\n\n"
 
     speaker: str = "tts_models/en/ljspeech/glow-tts"
+
+    # TODO: Remove mutable `default_factory` and replace with default values
+    puppeteer: dict = field(default_factory=dict)
