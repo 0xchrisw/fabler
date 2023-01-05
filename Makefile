@@ -29,8 +29,10 @@ all: help
 
 define Install
 	echo "🐍 Setting up virtual environment..."
+	if [ ! -x "$(command -v venv)" ]; then
+		python3 -m pip install venv
+	fi
 	if [ ! -d "$1" ]; then
-		python3 -m pip install --upgrade venv
 		python3 -m venv venv
 	fi
 	source venv/bin/activate
