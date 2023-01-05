@@ -6,17 +6,20 @@ num_images: 9
 # writer: "pranavpsv/genre-story-generator-v2"
 writer_device: "cuda:0"
 max_new_tokens: 42
-writer_prompt_prefix: "In the year 8163, society has been transformed by the rise of artificial intelligence. As the anchor of the nightly news broadcast, it's your job to report on the absurd events of the day, from Scientists discover portal to another dimension, leading to interdimensional tourism boom, to Ducks form own country, sparking international tensions."
-writer_prompt: "Good evening, and welcome to the nightly news. I'm your host, the only remaining human anchor, and it is March 6th 8163. There has been a world wide mass outbreak of zombie chickens. Initial investigations into the cause of the chicken zombie outbreak point towards a rogue group of vegan activists who tampered with the chicken feed at local farms. It was noticed after the release of a new, highly questionable chicken nugget flavor at a local fast food chain."
-
+writer_prompt_prefix: >
+  In the year 8163, society has been transformed by the rise of artificial intelligence. As the anchor of the nightly news broadcast, it's your job to report on the absurd events of the day, from Scientists discover portal to another dimension, leading to interdimensional tourism boom, to Ducks form own country, sparking international tensions.
+writer_prompt: >
+  Good evening, and welcome to the nightly news. It is March 9th 8163. In a shocking turn of events, a toaster has been appointed as the CEO of the largest technology company in the world. The announcement has caused widespread concern and debate about the role of artificial intelligence in the workplace. According to sources, the toaster was chosen for its efficiency and attention to detail. ... as well as its ability to handle multiple tasks at once. Critics argue that the appointment sets a dangerous precedent and could lead to the replacement of human workers with machines. The toaster, who declined to be interviewed, has already implemented several changes at the company.  The changes include the installation of additional outlets in the office for toasting bread and the introduction of a toaster-themed dress code. Employees at the company have mixed reactions to the appointment.
 
 # painter: "CompVis/stable-diffusion-v1-4"
 painter: "prompthero/openjourney"
 painter_device: "cuda:0"
 image_size: 256
-painter_prompt_prefix: "50mm f1.8 panoramic photo of"
-painter_prompt_postfix: "intricate detail, studio quality, fascinating, evocative, liminal space, uncanny, megaphobia, Bokeh, Graflex, mdjrny-v4 style"
+painter_prompt_prefix: >
+  ultra wide lens, 50mm f1.8 panoramic photo of
+painter_prompt_postfix: >
+  fantasy, eerie, cinematic lighting, creepy, sci fi, futuristic, intricate detail, studio quality, sharp focus, fascinating, evocative, liminal space, uncanny, megaphobia, Bokeh, Graflex, mdjrny-v4 style
 
 
-speaker: "tts_models/en/ljspeech/glow-tts"
+speaker: "tts_models/en/ljspeech/fast_pitch"
 
