@@ -28,7 +28,7 @@ dependencies = [
 
 
 [project.optional-dependencies]
-dev = [
+developer = [
   "black",
   "flake8",
   "isort",
