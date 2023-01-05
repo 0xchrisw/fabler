@@ -13,20 +13,6 @@ def check_ffmpeg():
         raise RuntimeError("`ffmpeg` not found. Please install `ffmpeg` and try again.")
 
 
-def make_timeline_string(start, end):
-    """Create timeline string to write onto .srt subtitle files."""
-    start = format_time(start)
-    end = format_time(end)
-    return f"{start} --> {end}"
-
-
-def format_time(time):
-    """Transform time (seconds) to .srt format."""
-    mm, ss = divmod(time, 60)
-    hh, mm = divmod(mm, 60)
-    return f"{hh:02d}:{mm:02d}:{ss:02d},000"
-
-
 def subprocess_run(command):
     """Wrapper around `subprocess.run()` with /dev/null redirection in stdout and stderr."""
     subprocess.run(
