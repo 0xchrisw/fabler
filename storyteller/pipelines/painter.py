@@ -6,9 +6,9 @@ from typing import List
 from PIL.Image import Image
 from diffusers import StableDiffusionPipeline
 import torch
-# from transformers import pipeline
 
 from storyteller import StoryTellerConfig
+
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 logging.getLogger("diffusers").setLevel(logging.CRITICAL)
