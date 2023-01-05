@@ -6,11 +6,11 @@ SHELL         := /bin/bash
 .DEFAULT_GOAL := help
 .LOGGING      := 0
 
-.ONESHELL:             ;  # Recipes execute in same shell
-.NOTPARALLEL:          ;  # Wait for this target to finish
-.SILENT:               ;  # No need for @
-.EXPORT_ALL_VARIABLES: ;  # Export variables to child processes.
-.DELETE_ON_ERROR:      ;  # Delete target if recipe fails.
+.ONESHELL:             ;	# Recipes execute in same shell
+.NOTPARALLEL:          ;	# Wait for this target to finish
+.SILENT:               ;	# No need for @
+.EXPORT_ALL_VARIABLES: ;	# Export variables to child processes.
+.DELETE_ON_ERROR:      ;	# Delete target if recipe fails.
 
 # Modify the block character to be `-\t` instead of `\t`
 ifeq ($(origin .RECIPEPREFIX), undefined)
@@ -36,6 +36,17 @@ define Install
 	source venv/bin/activate
 	python3 -m pip install --upgrade pip wheel
 	python3 -m pip install --no-compile --editable '.[developer]'
+endef
+
+
+define TypeCheck
+	mypy                         \
+		storyteller                \
+		--ignore-missing-imports   \
+		--follow-imports=skip      \
+		--show-error-codes         \
+		--show-column-numbers      \
+		--pretty
 endef
 
 
@@ -67,10 +78,14 @@ update: ## git pull branch
 lint: ## Lint the code
 -	black $(SRC_DIR)
 -	isort $(SRC_DIR)
--	flake8 $(SRC_DIR) --max-line-length 119
+-	flake8 --config=./utils/.flake8 $(SRC_DIR)
+
+
+.PHONY: type
+type: ## Type check the code
+-	$(call TypeCheck)
 
 
 .PHONY: clean
 clean: ## Remove build, test, and other Python artifacts
 -	rm -rf out
-
