@@ -1,0 +1,74 @@
+---
+name: 🦄 Code Linting & Scanning
+
+
+on:
+  workflow_dispatch:
+  push:
+
+
+# Limit workflow to one job per branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+
+jobs:
+  code-quality:
+    name: 💄 Code Quality
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📩 Checkout the source w/ full depth(for tags and SCM)
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+
+      - name: 🐍 Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+
+      - name: 🌱 Linting with black
+        run: |
+          mkdir -p /tmp/artifacts
+          python3 -m pip install --upgrade pip wheel
+          python3 -m pip install --no-compile --editable '.[developer]'
+          make style
+
+
+      - name: 🦹‍♂️ Scanning with bandit
+        run: |
+          bandit                                    \
+            -v                                      \
+            -f txt                                  \
+            -r ./storyteller                        \
+            -c "pyproject.toml"                     \
+            --output /tmp/artifacts/bandit_scan.txt \
+          || $( exit 0 ); echo $?
+
+
+      - name: 🖋️ mypy Type Checking
+        run: |
+          mypy                         \
+            storyteller                \
+            --ignore-missing-imports   \
+            --follow-imports=skip      \
+            --show-error-codes         \
+            --show-column-numbers      \
+            --pretty                   \
+            > /tmp/artifacts/mypy.txt  \
+          || $( exit 0 ); echo $?
+
+
+      - name: 📁 Archiving Artifacts
+        uses: actions/upload-artifact@v3
+        if: ${{ !failure() }}
+        continue-on-error: true
+        with:
+          name: scan-artifacts
+          retention-days: 1
+          path: |
+            /tmp/artifacts
