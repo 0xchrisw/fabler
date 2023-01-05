@@ -30,7 +30,7 @@ all: help
 define Install
 	echo "🐍 Setting up virtual environment..."
 	if [ ! -x "$(command -v venv)" ]; then
-		python3 -m pip install venv
+		python3 -m pip install virtualenv
 	fi
 	if [ ! -d "$1" ]; then
 		python3 -m venv venv
