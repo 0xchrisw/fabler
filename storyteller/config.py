@@ -5,7 +5,7 @@ from pathlib import Path
 @dataclass()
 class StoryTellerConfig:
     story: str = "Unicorn Earth"
-    output_dir: str = Path(__file__).parent.parent / "out"
+    output_dir: str = str(Path(__file__).parent.parent / "out")
     nsfw_check: bool = False
     seed: int = 42
     num_images: int = 10

@@ -15,12 +15,13 @@ def arguments():
     text = request.args.get("text", "")
     if not text:
         # TODO: Move to config
-        return Path(Path(__file__).parent.parent / "data" / "www" / "index.html").read_text(
-            encoding="utf-8"
-        )
+        return Path(
+            Path(__file__).parent.parent / "data" / "www" / "index.html"
+        ).read_text(encoding="utf-8")
 
     text = urllib.parse.unquote(text)
-    generation = model.autocomplete(text)
+    # generation = model.autocomplete(text)
+    generation = "this is where do the generation"
     out = {"generation": generation}
     return jsonify(out)
 

@@ -1,5 +1,3 @@
-import logging
-import os
 from pathlib import Path
 from typing import List
 
@@ -9,8 +7,6 @@ import torch
 from transformers import pipeline
 
 from storyteller import StoryTellerConfig
-
-# os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
 class StoryWriter:
