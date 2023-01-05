@@ -16,7 +16,7 @@ painter: "prompthero/openjourney"
 painter_device: "cuda:0"
 image_size: 256
 painter_prompt_prefix: >
-  ultra wide lens, 50mm f1.8 panoramic photo of
+  ultra wide lens, panoramic photo of
 painter_prompt_postfix: >
   fantasy, eerie, cinematic lighting, creepy, sci fi, futuristic, intricate detail, studio quality, sharp focus, fascinating, evocative, liminal space, uncanny, megaphobia, Bokeh, Graflex, mdjrny-v4 style
 
