@@ -18,12 +18,17 @@ app = Flask(
 )
 
 
+config = StoryTellerConfig()
+set_seed(config.seed)
+sentence_writer = writer.init(config)
+
 def Write(prompt_text:str, num_sentences: int) -> list:
-    config = StoryTellerConfig()
-    config.writer_prompt = prompt_text
-    config.num_images = num_sentences
-    set_seed(config.seed)
-    sentence_writer = writer.init(config)
+    # config = StoryTellerConfig(**{
+    #     "writer_prompt": prompt_text,
+    #     "num_images": num_sentences,
+    # })
+    # set_seed(config.seed)
+    # sentence_writer = writer.init(config)
     return sentence_writer.generate(prompt_text, num_sentences)
 
 
