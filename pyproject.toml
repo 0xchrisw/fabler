@@ -5,6 +5,7 @@ build-backend = "hatchling.build"
 
 [project.scripts]
 storyteller = "storyteller.__main__:main"
+storyteller-web = "storyteller.server:serve"
 
 
 [project]

@@ -1,50 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-color-mode="dark" data-dark-theme="dark_high_contrast">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <link rel="stylesheet" href="/assets/css/primer.css">
     <link rel="stylesheet" href="/assets/css/style.css">
   </head>
   <body>
-    <!-- hero -->
-    <div id="hero" class="flex one grow center">
-      <div class="title">
-        <h1></h1>
-        <h3>AI augmented  generation</h3>
-      </div>
-      <div class="callout">
-        <p>.</p>
+    <div class="Header">
+      <div class="Header-item">
+        <a href="#" class="Header-link f4 d-flex flex-items-center">
+          <span>StoryTeller</span>
+        </a>
       </div>
     </div>
-    </hr>
-    <!-- /hero -->
 
 
-    <div id="content">
-      <form action="/" method="get">
-        <div class="flex six">
-          <div class="sixth">SIEM:</div>
-          <div class="four-fifth">
-            <select>
-              <option value="elk" selected>ELK</option>
-              <option value="splunk">Splunk</option>
-            </select>
-          </div>
-
-          <div class="sixth">Query:</div>
-          <div class="four-fifth">
-            <input type="text" id="query_text" name="query_text" minlength="4" placeholder="start typing to begin...">
-          </div>
-
-          <div class="sixth">Results:</div>
-          <div class="four-fifth">
-            <textarea class="form-control" id="output" rows="6"></textarea>
+    <div class="container-xl clearfix">
+      <div class="col-sm-4 float-left border p-4">
+            <form>
+              <input name="num_sentences" id="num_sentences" class="form-control input-monospace" type="text" placeholder="# of Sentences" />
+              <div class="form-group">
+                <div class="form-group-header">
+                  <label for="prompt_text">Prompt:</label>
+                </div>
+                <div class="form-group-body">
+                  <textarea name="prompt_text" class="form-control" id="prompt_text"></textarea>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-large btn-block" type="submit">Generate!</button>
+            </form>
           </div>
         </div>
-      </form>
+      </div>
     </div>
 
+
+    <div class="container-xl clearfix">
+      <div class="col-sm-4 float-left border p-4">
+        <h1 class="text-center">Story</h1>
+      </div>
+      <div class="col-sm-4 float-left border p-4">
+        <h1 class="text-center">Audio</h1>
+      </div>
+      <div class="col-sm-4 float-left border p-4">
+        <h1 class="text-center">Images</h1>
+      </div>
+    </div>
+
+
+    <div class="container-xl clearfix">
+      <!--  -->
+      <div class="col-sm-4 float-left border p-4">
+        <div id="story">
+        </div>
+      </div>
+      <!--  -->
+
+
+      <!--  -->
+      <div class="col-sm-4 float-left border p-4">
+        <div id="audio">
+        </div>
+      </div>
+      <!--  -->
+
+
+      <!--  -->
+      <div class="col-sm-4 float-left border p-4">
+        <div id="images">
+        </div>
+      </div>
+      <!--  -->
+
+    </div>
 
     <script type="text/javascript" src="/assets/js/main.js"></script>
 
