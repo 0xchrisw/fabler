@@ -93,4 +93,3 @@ Released under the [MIT License](LICENSE).
 [license-url]: https://opensource.org/licenses/MIT
 [style-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [style-url]: https://github.com/ambv/black
-

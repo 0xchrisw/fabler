@@ -5,7 +5,7 @@ name: 🕊️ Release Workflow
 on:
   push:
     branches:
-      - master
+      - main
 
 
 # Limit workflow to one job per branch.
