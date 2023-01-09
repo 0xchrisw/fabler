@@ -16,7 +16,7 @@ class StoryTellerConfig:
     writer_prompt_prefix: str = f"Acting as a story teller. Tell a fascinating, {num_images} sentence story from begining to end about the following:\n"
     writer_prompt: str = "Once upon a time, unicorns roamed the Earth."
 
-    painter: str = "stabilityai/stable-diffusion-2-1"
+    painter: str = "prompthero/openjourney"
     painter_device: str = "cuda:0"
     image_size: int = 512
     painter_prompt_prefix: str = "beautiful painting"
