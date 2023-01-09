@@ -50,3 +50,7 @@ class StorySpeaker:
 
 def init(config: StoryTellerConfig) -> StorySpeaker:
     return StorySpeaker(config)
+
+
+# TODO: Check out Vall-E from Microsoft
+#       https://github.com/microsoft/unilm/tree/master/valle
