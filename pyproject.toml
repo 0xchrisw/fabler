@@ -12,7 +12,7 @@ storyteller-web = "storyteller.server:serve"
 name            = "storyteller"
 version         = "0.0.1"
 description     = "Multimodal AI Story Teller, built with Stable Diffusion, GPT, and neural text-to-speech."
-readme          = "README.md"
+readme          = "./.github/README.md"
 license         = "MIT"
 requires-python = ">=3.8"
 
