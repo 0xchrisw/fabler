@@ -40,10 +40,8 @@ jobs:
 
       - name: 🧱 Build wheel
         run: |
-          pip install wheel
-          pip install --upgrade pip wheel
-          pip install --editable ".[developer]"
-          hatch build --clean --target wheel
+          make build
+
 
       - name: 🐦 Release wheel
         uses: pypa/gh-action-pypi-publish@release/v1
