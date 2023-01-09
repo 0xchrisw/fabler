@@ -20,7 +20,6 @@ class StoryWriter:
             device=torch.device(config.writer_device),
             model=config.writer,
             # tokenizer="gpt2",
-            # config={"max_length": 1000},
         )
         # self.tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
