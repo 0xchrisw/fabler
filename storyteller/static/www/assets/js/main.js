@@ -1,9 +1,6 @@
 // 'use strict';
 
-
 var StoryTeller = StoryTeller || {};
-
-
 
 
 let parse_response = (query_text, response) => {
