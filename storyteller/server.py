@@ -1,11 +1,10 @@
-from pathlib import Path
-import urllib
-
-from flask import Flask, jsonify, request
 import logging
 import os
 from pathlib import Path
 from typing import List
+import urllib
+
+from flask import Flask, jsonify, request
 
 from storyteller import StoryTellerConfig
 from storyteller.pipelines import writer
@@ -13,8 +12,8 @@ from storyteller.utils import set_seed
 
 app = Flask(
     __name__,
-    template_folder = Path(__file__).parent / "static/www",
-    static_folder = Path(__file__).parent / "static/assets",
+    template_folder=Path(__file__).parent / "static/www",
+    static_folder=Path(__file__).parent / "static/assets",
 )
 
 
@@ -22,7 +21,8 @@ config = StoryTellerConfig()
 set_seed(config.seed)
 sentence_writer = writer.init(config)
 
-def Write(prompt_text:str, num_sentences: int) -> list:
+
+def Write(prompt_text: str, num_sentences: int) -> list:
     # config = StoryTellerConfig(**{
     #     "writer_prompt": prompt_text,
     #     "num_images": num_sentences,
@@ -38,9 +38,7 @@ def arguments():
     num_sentences = int(request.args.get("num_sentences", 0))
     if not prompt_text or not num_sentences:
         # TODO: Move to config
-        return Path(
-            app.template_folder / "index.html"
-        ).read_text(encoding="utf-8")
+        return Path(app.template_folder / "index.html").read_text(encoding="utf-8")
 
     prompt_text = urllib.parse.unquote(prompt_text)
     generation = Write(prompt_text, num_sentences)

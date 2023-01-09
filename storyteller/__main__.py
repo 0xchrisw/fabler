@@ -1,6 +1,6 @@
-import sys
 import argparse
 from pathlib import Path
+import sys
 
 import yaml
 
@@ -10,31 +10,25 @@ from storyteller import StoryTeller, StoryTellerConfig
 def cli_parser(argv=sys.argv[1:]):
     parser = argparse.ArgumentParser("storyteller")
     arguments = (
-        (   "--prompt",
+        (
+            "--prompt",
             dict(
                 type=str,
                 default="Once upon a time, unicorns roamed the Earth.",
                 help="Initial prompt used to generate the story.",
             ),
         ),
-        (   "--scene",
-            dict(
-                type=str,
-                default=None,
-                help="StoryTeller config file path."
-                ),
+        (
+            "--scene",
+            dict(type=str, default=None, help="StoryTeller config file path."),
         ),
-        (   "--num_images",
-            dict(
-                type=int,
-                default=10
-            ),
+        (
+            "--num_images",
+            dict(type=int, default=10),
         ),
-        (   "--story-only",
-            dict(
-                type=bool,
-                default=False
-            ),
+        (
+            "--story-only",
+            dict(type=bool, default=False),
         ),
     )
     for args, kwargs in arguments:

@@ -26,11 +26,9 @@ class StoryWriter:
 
     @torch.inference_mode()
     def _generate(self, prompt: str) -> str:
-        return self.model(
-            prompt,
-            max_new_tokens=self.config.max_new_tokens,
-            prefix=self.config.writer_prompt_prefix,
-        )[0]["generated_text"]
+        return self.model(prompt, max_new_tokens=self.config.max_new_tokens, prefix=self.config.writer_prompt_prefix,)[
+            0
+        ]["generated_text"]
 
     def generate(self, prompt: str, num_sentences: int) -> List[str]:
         sentences = sent_tokenize(prompt)

@@ -15,9 +15,7 @@ def check_ffmpeg():
 
 def subprocess_run(command):
     """Wrapper around `subprocess.run()` with /dev/null redirection in stdout and stderr."""
-    subprocess.run(
-        command.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-    )
+    subprocess.run(command.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def set_seed(seed):
