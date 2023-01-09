@@ -6,11 +6,11 @@ from nltk.tokenize import sent_tokenize
 import torch
 from transformers import pipeline
 
-from storyteller import StoryTellerConfig
+from fabler import FablerConfig
 
 
 class StoryWriter:
-    def __init__(self, config: StoryTellerConfig):
+    def __init__(self, config: FablerConfig):
         # global model, tokenizer
         nltk.download("punkt")
         self.config = config
@@ -40,5 +40,5 @@ class StoryWriter:
         return sentences
 
 
-def init(config: StoryTellerConfig) -> StoryWriter:
+def init(config: FablerConfig) -> StoryWriter:
     return StoryWriter(config)

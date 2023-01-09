@@ -20,7 +20,7 @@ endif
 
 
 PROJECT_DIR := $(shell git rev-parse --show-toplevel)
-SRC_DIR     := $(PROJECT_DIR)/storyteller
+SRC_DIR     := $(PROJECT_DIR)/fabler
 BUILD_DIR   := $(PROJECT_DIR)/dist
 
 default: $(.DEFAULT_GOAL)
@@ -49,7 +49,7 @@ endef
 
 
 define TypeCheck
-	python3 -m mypy storyteller  \
+	python3 -m mypy fabler       \
 		--ignore-missing-imports   \
 		--follow-imports=skip      \
 		--show-error-codes         \
@@ -90,7 +90,7 @@ build: ## Build the application
 
 .PHONY: run
 run: ## Run the application
--	python -m storyteller
+-	python -m fabler
 
 
 PHONY: update
@@ -111,7 +111,7 @@ type: ## Type check the code
 
 .PHONY: bandit
 bandit: ## Run bandit
--	$(call Bandit,./storyteller)
+-	$(call Bandit,./fabler)
 
 
 .PHONY: clean

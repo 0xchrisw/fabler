@@ -5,11 +5,11 @@ from typing import List
 
 import yaml
 
-from storyteller import StoryTeller, StoryTellerConfig
+from fabler import Fabler, FablerConfig
 
 
 def cli_parser(argv: List[str] = sys.argv[1:]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser("storyteller")
+    parser = argparse.ArgumentParser("fabler")
     arguments = (
         (
             "--prompt",
@@ -21,7 +21,7 @@ def cli_parser(argv: List[str] = sys.argv[1:]) -> argparse.Namespace:
         ),
         (
             "--scene",
-            dict(type=str, default=None, help="StoryTeller config file path."),
+            dict(type=str, default=None, help="Fabler config file path."),
         ),
         (
             "--num_images",
@@ -52,7 +52,7 @@ def main():
     if arguments.scene is not None and (scene_path := Path(arguments.scene)).exists():
         config = yaml.safe_load(scene_path.read_text())
 
-    story_teller = StoryTeller.init(StoryTellerConfig(**config))
+    story_teller = Fabler.init(FablerConfig(**config))
     story_teller.generate(config["writer_prompt"], config["num_images"])
 
 

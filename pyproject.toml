@@ -6,8 +6,8 @@ requires = [
 ]
 
 [project.scripts]
-storyteller = "storyteller.__main__:main"
-storyteller-web = "storyteller.server:serve"
+storyteller = "fabler.__main__:main"
+storyteller-web = "fabler.server:serve"
 
 
 [project]
@@ -92,7 +92,7 @@ include = [
   ".git",
   ".github",
   ".gitignore",
-  "storyteller",
+  "fabler",
   "utils",
   "data/",
   "LICENSE",
@@ -115,7 +115,7 @@ target-version = ["py39"]
 
 [tool.bandit]
 recursive = true
-targets = [ "storyteller" ]
+targets = [ "fabler" ]
 skips   = [
   "B101",  # Ignore defensive `assert`s (especially useful for mypy)
   "B404",  # Ignore warnings about importing subprocess

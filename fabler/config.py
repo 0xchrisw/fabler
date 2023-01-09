@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 @dataclass()
-class StoryTellerConfig:
+class FablerConfig:
     story: str = "Unicorn Earth"
     output_dir: str = str(Path(__file__).parent.parent / "out")
     nsfw_check: bool = False

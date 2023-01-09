@@ -5,7 +5,7 @@ from TTS.api import TTS
 import soundfile
 import torch
 
-from storyteller import StoryTellerConfig
+from fabler import FablerConfig
 
 
 def make_timeline_string(start, end):
@@ -23,7 +23,7 @@ def format_time(time):
 
 
 class StorySpeaker:
-    def __init__(self, config: StoryTellerConfig):
+    def __init__(self, config: FablerConfig):
         self.config = config
         self.model = TTS(config.speaker, progress_bar=True, gpu=True)
         self.sample_rate = self.model.synthesizer.output_sample_rate
@@ -48,7 +48,7 @@ class StorySpeaker:
         return str(audio_path)
 
 
-def init(config: StoryTellerConfig) -> StorySpeaker:
+def init(config: FablerConfig) -> StorySpeaker:
     return StorySpeaker(config)
 
 

@@ -3,17 +3,17 @@ import os
 from pathlib import Path
 from typing import List
 
-from storyteller import StoryTellerConfig
-from storyteller.pipelines import painter, speaker, writer
-from storyteller.utils import check_ffmpeg, set_seed, subprocess_run
+from fabler import FablerConfig
+from fabler.pipelines import painter, speaker, writer
+from fabler.utils import check_ffmpeg, set_seed, subprocess_run
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 logging.getLogger("diffusers").setLevel(logging.CRITICAL)
 logging.getLogger("transformers").setLevel(logging.CRITICAL)
 
 
-class StoryTeller:
-    def __init__(self, config: StoryTellerConfig):
+class Fabler:
+    def __init__(self, config: FablerConfig):
         check_ffmpeg()
         set_seed(config.seed)
         self.config = config
@@ -23,7 +23,7 @@ class StoryTeller:
         os.makedirs(config.output_dir, exist_ok=True)
 
     @classmethod
-    def init(cls, config: StoryTellerConfig = StoryTellerConfig()):
+    def init(cls, config: FablerConfig = FablerConfig()):
         return cls(config)
 
     def generate(

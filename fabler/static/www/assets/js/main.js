@@ -1,6 +1,6 @@
 // 'use strict';
 
-var StoryTeller = StoryTeller || {};
+var Fabler = Fabler || {};
 
 
 let parse_response = (query_text, response) => {

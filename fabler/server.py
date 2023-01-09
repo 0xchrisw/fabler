@@ -7,9 +7,9 @@ import urllib
 
 from flask import Flask, jsonify, request
 
-from storyteller import StoryTellerConfig
-from storyteller.pipelines import writer
-from storyteller.utils import set_seed
+from fabler import FablerConfig
+from fabler.pipelines import writer
+from fabler.utils import set_seed
 
 app = Flask(
     __name__,
@@ -18,13 +18,13 @@ app = Flask(
 )
 
 
-config = StoryTellerConfig()
+config = FablerConfig()
 set_seed(config.seed)
 sentence_writer = writer.init(config)
 
 
 def Write(prompt_text: str, num_sentences: int) -> list:
-    # config = StoryTellerConfig(**{
+    # config = FablerConfig(**{
     #     "writer_prompt": prompt_text,
     #     "num_images": num_sentences,
     # })

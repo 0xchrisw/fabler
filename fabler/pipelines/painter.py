@@ -5,7 +5,7 @@ from PIL.Image import Image
 from diffusers import StableDiffusionPipeline
 import torch
 
-from storyteller import StoryTellerConfig
+from fabler import FablerConfig
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 logging.getLogger("diffusers").setLevel(logging.CRITICAL)
@@ -13,7 +13,7 @@ logging.getLogger("transformers").setLevel(logging.CRITICAL)
 
 
 class StoryPainter:
-    def __init__(self, config: StoryTellerConfig):
+    def __init__(self, config: FablerConfig):
         self.config = config
         self.model = StableDiffusionPipeline.from_pretrained(
             self.config.painter,
@@ -53,5 +53,5 @@ class StoryPainter:
     #     print(animations)
 
 
-def init(config: StoryTellerConfig) -> StoryPainter:
+def init(config: FablerConfig) -> StoryPainter:
     return StoryPainter(config)
