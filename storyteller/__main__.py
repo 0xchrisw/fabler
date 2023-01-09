@@ -1,9 +1,10 @@
 import argparse
 from pathlib import Path
 import sys
+from typing import List
 
 import yaml
-from typing import List
+
 from storyteller import StoryTeller, StoryTellerConfig
 
 
@@ -32,8 +33,8 @@ def cli_parser(argv: List[str] = sys.argv[1:]) -> argparse.Namespace:
         ),
     )
     for args, kwargs in arguments:
-        args = args if isinstance(args, tuple) else (args,)
-        parser.add_argument(*args, **kwargs)
+        _args = args if isinstance(args, tuple) else (args,)
+        parser.add_argument(*_args, **kwargs)  # type: ignore
 
     if len(argv) == 0 or argv[0] in ("usage", "help"):
         parser.print_help()

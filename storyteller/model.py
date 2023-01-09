@@ -45,7 +45,6 @@ class StoryTeller:
             "video": Path(f"{self.config.output_dir}/{id_}.mp4"),
         }
 
-
     def concat_videos(self, video_paths: List[dict]) -> None:
         files_data = []
         files_path = Path(f"{self.config.output_dir}/files.txt")
