@@ -13,8 +13,8 @@ from storyteller.utils import set_seed
 
 app = Flask(
     __name__,
-    template_folder = Path(__file__).parent.parent / "data/www",
-    static_folder = Path(__file__).parent.parent / "data/www/assets",
+    template_folder = Path(__file__).parent / "static/www",
+    static_folder = Path(__file__).parent / "static/assets",
 )
 
 
