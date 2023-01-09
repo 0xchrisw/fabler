@@ -28,6 +28,12 @@ painter_prompt_postfix: >
   true crime, drama, eerie, cinematic lighting, creepy, intricate detail, studio quality, sharp focus, fascinating, evocative, liminal space, uncanny, mdjrny-v4 style
 
 
+# TODO
 puppeteer:
-  model: "test/model"
-
+  writer:
+    device: "cuda"
+    model:
+      name: "test/model"
+      params:
+        args: "TODO"
+        kwargs: "TODO"
