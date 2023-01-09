@@ -3,11 +3,11 @@ from pathlib import Path
 import sys
 
 import yaml
-
+from typing import List
 from storyteller import StoryTeller, StoryTellerConfig
 
 
-def cli_parser(argv=sys.argv[1:]):
+def cli_parser(argv: List[str] = sys.argv[1:]) -> argparse.Namespace:
     parser = argparse.ArgumentParser("storyteller")
     arguments = (
         (
@@ -46,14 +46,13 @@ def cli_parser(argv=sys.argv[1:]):
 
 def main():
     arguments = cli_parser()
+    config = arguments.__dict__
 
-    if arguments.scene is not None and Path(arguments.scene).exists():
-        _config = yaml.safe_load(open(arguments.scene))
-        story_teller = StoryTeller.init(StoryTellerConfig(**_config))
-    else:
-        _config = arguments.__dict__
-        story_teller = StoryTeller.init()
-    story_teller.generate(_config["writer_prompt"], _config["num_images"])
+    if arguments.scene is not None and (scene_path := Path(arguments.scene)).exists():
+        config = yaml.safe_load(scene_path.read_text())
+
+    story_teller = StoryTeller.init(StoryTellerConfig(**config))
+    story_teller.generate(config["writer_prompt"], config["num_images"])
 
 
 if __name__ == "__main__":
