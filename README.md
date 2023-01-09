@@ -29,17 +29,19 @@ $ git clone https://github.com/christopherwoodall/fabler.git
 
 ```bash
 $ pip install --upgrade pip wheel
-$ pip install -e .
-# for dev requirements, do:
-# pip install -e .[developer]
+$ pip install -e ".[developer]"
 ```
 
 3. Run the demo. The final video will be saved as `/out/out.mp4`, alongside other intermediate images, audio files, and subtitles.
 
 ```bash
-$ fabler
-# alternatively with make, do:
-# make run
+$ fabler --scene=scene.yaml
+```
+
+4 Alternatively with make:
+
+```bash
+make install && make run
 ```
 
 ## Usage
