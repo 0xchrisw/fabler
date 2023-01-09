@@ -14,7 +14,7 @@ version = "0.0.1"
 
 name        = "storyteller"
 description = ""
-readme      = "./.github/README.md"
+readme      = "README.md"
 license     = "MIT"
 
 dependencies = [
@@ -30,6 +30,7 @@ dependencies = [
 
 [project.optional-dependencies]
 developer = [
+  "hatch",            # Build tool
   "black",            # Code formatting
   "isort",            # Code formatting
   "flake8",           # Linting
