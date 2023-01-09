@@ -49,14 +49,7 @@ jobs:
 
       - name: 🦹‍♂️ Scanning with bandit
         run: |
-          python3 -m pip install bandit
-          bandit                                    \
-            -v                                      \
-            -f txt                                  \
-            -r ./storyteller                        \
-            -c "pyproject.toml"                     \
-            --output /tmp/artifacts/bandit_scan.txt \
-          || $( exit 0 ); echo $?
+          make bandit > /tmp/artifacts/bandit_scan.txt || $( exit 0 ); echo $?
 
 
       - name: 🖋️ mypy Type Checking

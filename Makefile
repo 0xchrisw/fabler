@@ -19,7 +19,7 @@ endif
 .RECIPEPREFIX = -
 
 
-PROJECT_DIR := $(shell pwd)
+PROJECT_DIR := $(shell git rev-parse --show-toplevel)
 SRC_DIR     := $(PROJECT_DIR)/storyteller
 BUILD_DIR   := $(PROJECT_DIR)/dist
 
@@ -55,6 +55,15 @@ define TypeCheck
 		--show-error-codes         \
 		--show-column-numbers      \
 		--pretty
+endef
+
+
+define Bandit
+	bandit                 \
+		-v                   \
+		-f txt               \
+		-r $1                \
+		-c "pyproject.toml"
 endef
 
 
@@ -98,6 +107,11 @@ lint: ## Lint the code
 .PHONY: type
 type: ## Type check the code
 -	$(call TypeCheck)
+
+
+.PHONY: bandit
+bandit: ## Run bandit
+-	$(call Bandit,./storyteller)
 
 
 .PHONY: clean
