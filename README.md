@@ -1,7 +1,12 @@
 # Fabler
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI][ci-badge]][ci-url]
+[![PyPI Status Badge][pypi-badge]][pypi-url]
+[![PyPI - Python Version][python-badge]][python-url]
+[![Code style: black][style-badge]][style-url]
+[![License: MIT][license-badge]][license-url]
+
+---
 
 A multimodal AI story teller, built with [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion), GPT, and neural text-to-speech (TTS).
 
@@ -74,3 +79,18 @@ story_teller.generate(...)
 ## License
 
 Released under the [MIT License](LICENSE).
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[ci-badge]: https://github.com/christopherwoodall/fabler/actions/workflows/lint.yml/badge.svg?branch=main
+[ci-url]: https://github.com/christopherwoodall/fabler/actions/workflows/lint.yml
+[pypi-badge]: https://badge.fury.io/py/fabler.svg
+[pypi-url]: https://pypi.org/project/fabler
+[python-badge]: https://img.shields.io/pypi/pyversions/fabler
+[python-url]: https://pypi.org/project/fabler
+[license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
+[license-url]: https://opensource.org/licenses/MIT
+[style-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[style-url]: https://github.com/ambv/black
+

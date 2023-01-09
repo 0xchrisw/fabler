@@ -12,7 +12,7 @@ fabler-web = "fabler.server:serve"
 
 [project]
 name            = "fabler"
-version         = "0.0.2"
+version         = "0.0.3"
 description     = "Multimodal AI Story Teller, built with Stable Diffusion, GPT, and neural text-to-speech."
 readme          = "README.md"
 license         = "MIT"
@@ -63,6 +63,10 @@ dependencies = [
   "TTS",
   "pyyaml",
 ]
+
+
+[project.urls]
+GitHub = "https://github.com/christopherwoodall/fabler"
 
 
 [project.optional-dependencies]
