@@ -17,6 +17,9 @@ Given a prompt as an opening line of a story, GPT writes the rest of the plot; S
 
 ## Quickstart
 
+### Live Demo [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/christopherwoodall/fabler/blob/main/utils/demo.ipynb) or follow the instructions below to install locally.
+
+
 ### Install from [PyPi](https://pypi.org/project/fabler/)
 ```bash
 $ pip install fabler
