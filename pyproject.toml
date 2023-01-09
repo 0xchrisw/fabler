@@ -6,8 +6,8 @@ requires = [
 ]
 
 [project.scripts]
-storyteller = "fabler.__main__:main"
-storyteller-web = "fabler.server:serve"
+fablerer = "fabler.__main__:main"
+fabler-web = "fabler.server:serve"
 
 
 [project]
