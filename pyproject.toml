@@ -9,33 +9,75 @@ storyteller-web = "storyteller.server:serve"
 
 
 [project]
+name            = "storyteller"
+version         = "0.0.1"
+description     = "Multimodal AI Story Teller, built with Stable Diffusion, GPT, and neural text-to-speech."
+readme          = "README.md"
+license         = "MIT"
 requires-python = ">=3.8"
-version = "0.0.1"
 
-name        = "storyteller"
-description = ""
-readme      = "README.md"
-license     = "MIT"
+authors = [
+  { name = "Jake Tae",            email = "jaesungtae@gmail.com" },
+  { name = "Christopher Woodall", email = "woodall.christopher@gmail.com" },
+]
+
+keywords = [
+  "GPT",
+  "TTS",
+  "transformer",
+  "multimodal AI",
+  "language-model",
+  "stable diffusion",
+  "neural text-to-speech",
+]
+
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Environment :: Console",
+  "Environment :: GPU",
+  "Environment :: Web Environment",
+  "Framework :: Flask",
+  "Framework :: Hatch",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 
 dependencies = [
   "accelerate[test_trackers]",
   "diffusers",
   "flask",
+  "nltk",
+  "tensorboard",
   "transformers",
   "TTS",
   "pyyaml",
-  "tensorboard",
 ]
 
 
 [project.optional-dependencies]
 developer = [
   "hatch",            # Build tool
+  "pre-commit",       # Git hooks
   "black",            # Code formatting
   "isort",            # Code formatting
   "flake8",           # Linting
   "mypy",             # Type checking
   "types-PyYAML",     # Type checking
+]
+
+staging = [
+  # See haystack/nodes/retriever/_embedding_encoder.py, _SentenceTransformersEmbeddingEncoder
+  "sentence-transformers>=2.2.0",
+
 ]
 
 
@@ -94,4 +136,3 @@ show_column_numbers = true
 show_error_codes = true
 warn_no_return = false
 warn_unused_ignores = true
-
