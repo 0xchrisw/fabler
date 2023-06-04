@@ -1,6 +1,8 @@
 ---
 
-num_images: 19
+animated: True
+num_images: 6
+
 
 
 # writer: "pranavpsv/genre-story-generator-v2"
@@ -26,14 +28,3 @@ painter_prompt_prefix: >
   ultra wide lens, panoramic photo of
 painter_prompt_postfix: >
   true crime, drama, eerie, cinematic lighting, creepy, intricate detail, studio quality, sharp focus, fascinating, evocative, liminal space, uncanny, mdjrny-v4 style
-
-
-# TODO
-puppeteer:
-  writer:
-    device: "cuda"
-    model:
-      name: "test/model"
-      params:
-        args: "TODO"
-        kwargs: "TODO"
