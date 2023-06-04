@@ -67,4 +67,4 @@ makefile       text
 *.pyd    binary
 *.pyo    binary
 # Ignore Jupyter notebooks
-.ipynb linguist-documentation
+notebooks/** linguist-vendored
