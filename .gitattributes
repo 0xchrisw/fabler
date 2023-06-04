@@ -66,5 +66,5 @@ makefile       text
 *.pyc    binary
 *.pyd    binary
 *.pyo    binary
-# Jupyter notebook
-*.ipynb  text
+# Ignore Jupyter notebooks
+.ipynb linguist-documentation
