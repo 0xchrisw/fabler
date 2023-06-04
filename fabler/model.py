@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List
 
 from fabler import FablerConfig
-from fabler.pipelines import painter, speaker, writer
+from fabler.pipelines import painter, speaker, writer, animator
 from fabler.utils import check_ffmpeg, set_seed, subprocess_run
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -18,8 +18,6 @@ class Fabler:
         set_seed(config.seed)
         self.config = config
         self.writer = writer.init(self.config)
-        self.speaker = speaker.init(self.config)
-        self.painter = painter.init(self.config)
         os.makedirs(config.output_dir, exist_ok=True)
 
     @classmethod
@@ -31,11 +29,21 @@ class Fabler:
         prompt: str,
         num_images: int,
     ) -> None:
-        video_paths = []
-        sentences = self.writer.generate(prompt, num_images)
-        for i, sentence in enumerate(sentences):
-            video_paths.append(self._generate(i, sentence))
-        self.concat_videos(video_paths)
+        if self.config.animated:
+            self.animator = animator.init(self.config)
+            if num_images % 2 == 0:
+                num_images += 1
+            sentences = self.writer.generate(prompt, num_images - 1)
+            sentences.append("The End")
+            video_paths = self.animator.generate(sentences)
+        else:
+            video_paths = []
+            self.speaker = speaker.init(self.config)
+            self.painter = painter.init(self.config)
+            sentences = self.writer.generate(prompt, num_images)
+            for i, sentence in enumerate(sentences):
+                video_paths.append(self._generate(i, sentence))
+            self.concat_videos(video_paths)
 
     def _generate(self, id_: int, sentence: str) -> dict:
         return {
