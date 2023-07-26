@@ -12,14 +12,13 @@ fabler-web = "fabler.server:serve"
 
 [project]
 name            = "fabler"
-version         = "0.0.5"
+version         = "0.0.6"
 description     = "Multimodal AI Story Teller, built with Stable Diffusion, GPT, and neural text-to-speech."
 readme          = "README.md"
 license         = "MIT"
 requires-python = ">=3.8"
 
 authors = [
-  { name = "Jake Tae",            email = "jaesungtae@gmail.com" },
   { name = "Christopher Woodall", email = "woodall.christopher@gmail.com" },
 ]
 
